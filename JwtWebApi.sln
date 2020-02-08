@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtWebApi", "JwtWebApi\JwtWebApi.csproj", "{61DAA7F4-C7A2-4091-9194-D6B1451D65F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtModels", "JwtModels\JwtModels.csproj", "{D0D5AA24-D996-473E-8EAE-8120A73B1115}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtDatabase", "JwtDatabase\JwtDatabase.csproj", "{DF2F42E0-A3A3-49C0-A2A6-25419F990119}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61DAA7F4-C7A2-4091-9194-D6B1451D65F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61DAA7F4-C7A2-4091-9194-D6B1451D65F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61DAA7F4-C7A2-4091-9194-D6B1451D65F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61DAA7F4-C7A2-4091-9194-D6B1451D65F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0D5AA24-D996-473E-8EAE-8120A73B1115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0D5AA24-D996-473E-8EAE-8120A73B1115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D5AA24-D996-473E-8EAE-8120A73B1115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D5AA24-D996-473E-8EAE-8120A73B1115}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF2F42E0-A3A3-49C0-A2A6-25419F990119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF2F42E0-A3A3-49C0-A2A6-25419F990119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF2F42E0-A3A3-49C0-A2A6-25419F990119}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF2F42E0-A3A3-49C0-A2A6-25419F990119}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B0F80C2B-AD90-4F74-B485-D98FA85BB8B7}
+	EndGlobalSection
+EndGlobal
