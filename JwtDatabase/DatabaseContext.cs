@@ -10,6 +10,7 @@ namespace JwtDatabase
       }
 
       public DbSet<User> User { get; set; }
+      public DbSet<Todo> Todo { get; set; }
 
       protected override void OnModelCreating(ModelBuilder modelBuilder)
       {         
@@ -29,6 +30,17 @@ namespace JwtDatabase
                .HasMaxLength(100)
                .IsRequired()
                .IsUnicode(false);
+         });
+         modelBuilder.Entity<Todo>(o =>
+         {
+            o.HasKey(x => x.Id);
+            o.Property(x => x.Id);
+            o.Property(x => x.Title)
+               .HasMaxLength(100)
+               .IsRequired()
+               .IsUnicode(false);
+            o.Property(x => x.Done)
+               .IsRequired();
          });
       }
    }

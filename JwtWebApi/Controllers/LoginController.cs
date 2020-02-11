@@ -1,5 +1,6 @@
 ﻿using JwtDatabase;
 using JwtModels;
+using JwtWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -11,31 +12,34 @@ namespace JwtWebApi.Controllers
    public class LoginController : ControllerBase
    {
       public DatabaseContext DatabaseContext { get; }
-      public LoginController(DatabaseContext databaseContext)
+      public TokenService TokenService { get; }
+
+      public LoginController(DatabaseContext databaseContext, TokenService tokenService)
       {
          DatabaseContext = databaseContext ?? throw new ArgumentNullException(nameof(databaseContext));
+         TokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
       }
 
       [HttpPost]
       [Route("auth")]
       public IActionResult Authenticate(Login login)
       {
-         User user = DatabaseContext
-            .User
-            .Where(x => x.Email == login.Email && x.Password == x.Password)
-            .FirstOrDefault();
-
-         if (user == null)
+         if (ModelState.IsValid)
          {
-            return NotFound(new { message = "User no found" });
-         }
+            User user = DatabaseContext
+               .User
+               .Where(x => x.Email == login.Email && x.Password == login.Password)
+               .FirstOrDefault();
 
-         string token = TokenService.GenerateToken(user);
+            if (user == null)
+            {
+               return NotFound(new { message = "User no found" });
+            }
 
-         return new JsonResult(new
-         {
-            token
-         });
+            TokenResult tokenResult = TokenService.GenerateTokenResult(user);
+            return new JsonResult(tokenResult);
+         }         
+         return BadRequest(ModelState);
       }
    }
 }

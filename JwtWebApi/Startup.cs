@@ -1,4 +1,5 @@
 using JwtDatabase;
+using JwtWebApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace JwtWebApi
 {
@@ -22,18 +22,17 @@ namespace JwtWebApi
 
       public void ConfigureServices(IServiceCollection services)
       {
-         services.AddDbContext<DatabaseContext>(x => 
-         { 
+         services.AddScoped<TokenService>();
+         services.AddDbContext<DatabaseContext>(x =>
+         {
             x.UseSqlite("Data Source=database.db", options =>
             {
                options.MigrationsAssembly("JwtWebApi");
-            });            
+            });
          });
 
          services.AddCors();
          services.AddControllers();
-
-         byte[] key = Encoding.ASCII.GetBytes(Settings.Secret);
          services.AddAuthentication(x =>
          {
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -42,11 +41,11 @@ namespace JwtWebApi
          .AddJwtBearer(x =>
          {
             x.RequireHttpsMetadata = false;
-            x.SaveToken = true;
+            x.SaveToken = true;            
             x.TokenValidationParameters = new TokenValidationParameters
             {
                ValidateIssuerSigningKey = true,
-               IssuerSigningKey = new SymmetricSecurityKey(key),
+               IssuerSigningKey = new SymmetricSecurityKey(Settings.SecretToByte()),
                ValidateIssuer = false,
                ValidateAudience = false
             };
