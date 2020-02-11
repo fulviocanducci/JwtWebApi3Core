@@ -2,7 +2,7 @@
 
 namespace JwtWebApi.Services
 {
-   public sealed class TokenResult
+   public sealed class TokenResult : ITokenResult
    {
       public string Token { get; }
       public DateTime Expires { get; }

@@ -1,4 +1,5 @@
 using JwtDatabase;
+using JwtWebApi.Repositories.Login;
 using JwtWebApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -22,17 +23,21 @@ namespace JwtWebApi
 
       public void ConfigureServices(IServiceCollection services)
       {
-         services.AddScoped<TokenService>();
          services.AddDbContext<DatabaseContext>(x =>
          {
             x.UseSqlite("Data Source=database.db", options =>
             {
                options.MigrationsAssembly("JwtWebApi");
             });
-         });
+         });         
+         
+         services.AddScoped<ITokenService, TokenService>();
+         services.AddScoped<IRepositoryLogin, RepositoryLogin>();
 
          services.AddCors();
+         
          services.AddControllers();
+         
          services.AddAuthentication(x =>
          {
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

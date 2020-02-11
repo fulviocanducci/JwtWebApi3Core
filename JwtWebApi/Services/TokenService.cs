@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace JwtWebApi.Services
 {
-   public sealed class TokenService
+   public sealed class TokenService : ITokenService
    {
       public TokenResult GenerateTokenResult(User user)
       {
@@ -16,7 +16,7 @@ namespace JwtWebApi.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-                  new Claim(ClaimTypes.Name, user.Email), 
+                  new Claim(ClaimTypes.Name, user.Email),
                   new Claim(ClaimTypes.Email, user.Email)
                   //new Claim(ClaimTypes.Role, user.Role.ToString())
             }),
@@ -27,7 +27,7 @@ namespace JwtWebApi.Services
                SecurityAlgorithms.HmacSha256Signature
             )
          };
-         SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);         
+         SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
          return new TokenResult(tokenHandler.WriteToken(token), expires, true);
       }
    }
